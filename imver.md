@@ -89,3 +89,10 @@ The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL 
 ## About
 
 Immutable Versioning is inspired by [”Spec-ulation” by Rich Hickey](https://www.youtube.com/watch?v=oyLBGkS5ICk) from Clojure Conj 2016 and authored by Viktor Charypar, Tech Director at [Red Badger](https://red-badger.com). The format of this document and the formal specification is based on the [semantic versioning](https://semver.org) specification.
+
+If you wish to leave feedback, open a [GitHub issue](https://github.com/imver/imver/issues).
+
+## License
+
+This work is licensed under [Creative Commons Attribution 4.0 International (CC BY 4.0)
+](https://creativecommons.org/licenses/by/4.0/).
