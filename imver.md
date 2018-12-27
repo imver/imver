@@ -4,17 +4,20 @@
 
 An Immutable Version number is a version number with a format
 
-ivNUMBER(-LABEL) - for example: iv2019.01.01-beta.3
+```
+ivNUMBER(-LABEL)
+```
 
-- ‘iv’ identifies the version number as being an Immutable Version number and declares it follows this specification
-- NUMBER is a numeric string with any number of optional ‘.’ (dot) characters for human readability. Dots are allowed anywhere in the NUMBER part except first and last character and are considered whitespace - they do not carry information.
-- NUMBER with dots removed monotonically increases with every new version
-  \* LABEL can be any string of alphanumeric characters, dots or hyphens. Labels contain meta information for humans, such as nature of the release, source package version for language bindings, etc., and are ignored by package managers
+for example: `iv2019.01.01-beta.3`
+
+- `iv` identifies the version number as being an Immutable Version number and declares it follows this specification
+- `NUMBER` is a numeric string with any number of optional `.` (dot) characters for human readability. Dots are allowed anywhere in the `NUMBER` part except first and last character and are considered whitespace - they do not carry information.
+- `NUMBER` with dots removed monotonically increases with every new version.
+- `LABEL` can be any string of alphanumeric characters, dots or hyphens. Labels contain meta information for humans, such as nature of the release, source package version for language bindings, etc., and are ignored by package managers
 
 In Immutable Versioning
 
-\* Breaking changes in public API or behaviour are strictly not allowed
-
+- Breaking changes in public API or behaviour are strictly not allowed
 - Public API calls can be deprecated (in language or documentation), meaning they are no longer supported and issues in them are unlikely to get fixed
 - Package management software provides a mechanism to mark packages as deprecated when issues are discovered
 - Package management software supports at least two installation modes
@@ -37,7 +40,7 @@ Immutable versioning proposes a solution to these problems by requiring full bac
 
 This is a strong requirement but it allows safe upgrades and lets the maintainer focus their efforts solely on the latest version of their package. Any break in compatibility is considered an issue to be fixed.
 
-The version number itself is used as metadata to convey information to humans, namely, the ordering of versions. For two versions it is always decidable which of them is the newer one. Authors can chose a versioning scheme to also convey other information, such as the versions age (implying confidence). A recommendation is to use any subset of a date formatted YYYY.MM.DD.HH.MM.SS as the version number.
+The version number itself is used as metadata to convey information to humans, namely, the ordering of versions. For two versions it is always decidable which of them is the newer one. Authors can chose a versioning scheme to also convey other information, such as the versions age (implying confidence). A recommendation is to use any subset of a date formatted `YYYY.MM.DD.HH.MM.SS` as the version number.
 
 In order to work as a system, Immutable Versioning also puts a limited set of requirements on maintainers and package management software, and sets maintenance expectations for packages.
 
@@ -55,25 +58,28 @@ Packages versioned with Immutable Versioning are NOT allowed to:
   Tighten input requirements (e.g. require extra function arguments) of public APIs
 - Restricting return values (e.g. remove members from a return collection) of public APIs
   Add or remove side effects of public APIs
-- In order to facilitate safe automatic upgrades, it is necessary for package management systems to allow:
-  \* Marking packages as deprecated, signifying there is a known issue with them
+
+In order to facilitate safe automatic upgrades, it is necessary for package management systems to allow:
+
+- Marking packages as deprecated, signifying there is a known issue with them
 - Consumers to decide whether to install any supported (not deprecated) version later than the one requested or exactly the version requested (for unsupervised installation)
 
 Adopting Immutable Versioning sets the following maintenance expectations on the package:
 
-* Issues affecting supported API calls will be fixed and a new version will be released. All version affected by the issue will be deprecated.
-* Issues only affecting deprecated API calls may NOT be fixed (as there is a supported version that can be upgraded to).
-* Issues only affecting deprecated package versions may NOT be fixed.
-* This allows maintainers to focus their effort on the latest versions of the package and effectively ignore deprecated APIs and old versions.
+- Issues affecting supported API calls will be fixed and a new version will be released. All version affected by the issue will be deprecated.
+- Issues only affecting deprecated API calls may NOT be fixed (as there is a supported version that can be upgraded to).
+- Issues only affecting deprecated package versions may NOT be fixed.
+
+This allows maintainers to focus their effort on the latest versions of the package and effectively ignore deprecated APIs and old versions.
 
 ## Immutable Versioning Specification (ImVer)
 
 The key words “MUST”, “MUST NOT”, “REQUIRED”, “SHALL”, “SHALL NOT”, “SHOULD”, “SHOULD NOT”, “RECOMMENDED”, “MAY”, and “OPTIONAL” in this document are to be interpreted as described in [RFC 2119](http://tools.ietf.org/html/rfc2119).
 
 1. Software using Immutable Versioning MUST declare a public API either in code or in documentation.
-1. An Immutable Version number MUST take the form ivNUMBER, where NUMBER is a string of numeric characters or dots (full stops), MUST NOT begin with a zero and MUST NOT contain two or more consecutive dots.
-1. The number, with dots removed, MUST increase numerically for subsequently released versions. It is RECOMMENDED to use any subset of a calendar date in the format YYYY.MM.DD.HH.MM.SS as the NUMBER using the UTC time zone. For example: iv2019.03.29
-1. An Immutable Version number MAY contain an additional label, following the number part, and separated from it by a hyphen (‘-’). The label MUST be a string of ASCII alphanumeric characters, numbers, dots or hyphens in any order. The label MUST NOT be an empty string. The label is intended for additional metadata and MUST be ignored by package management software. For example: iv2019.03.29-rc.1
+1. An Immutable Version number MUST take the form `ivNUMBER`, where `NUMBER` is a string of numeric characters or dots (full stops), MUST NOT begin with a zero and MUST NOT contain two or more consecutive dots.
+1. The number, with dots removed, MUST increase numerically for subsequently released versions. It is RECOMMENDED to use any subset of a calendar date in the format `YYYY.MM.DD.HH.MM.SS` as the `NUMBER` using the UTC time zone. For example: `iv2019.03.29`
+1. An Immutable Version number MAY contain an additional label, following the number part, and separated from it by a hyphen (`-`). The label MUST be a string of ASCII alphanumeric characters, numbers, dots or hyphens in any order. The label MUST NOT be an empty string. The label is intended for additional metadata and MUST be ignored by package management software. For example: `iv2019.03.29-rc.1`
 1. Once an immutably versioned package has been released the contents of the version MUST NOT be modified. Any modifications MUST be released as a new version.
 1. The public APIs which were released MUST NOT be removed and their behaviours MUST NOT change in subsequent releases.
 1. In subsequent releases, the public APIs MUST NOT require additional inputs, return fewer outputs or new cases for the consumer to handle, have additional side-effects or remove some expected side-effects. The exact nature of breaking changes depends on language and type system.
