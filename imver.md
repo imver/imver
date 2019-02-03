@@ -1,4 +1,4 @@
-# Immutable Versioning (draft)
+# Immutable Versioning
 
 ## Summary
 
@@ -71,6 +71,14 @@ Adopting Immutable Versioning sets the following maintenance expectations on the
 - Issues only affecting deprecated package versions may NOT be fixed.
 
 This allows maintainers to focus their effort on the latest versions of the package and effectively ignore deprecated APIs and old versions.
+
+Immutable Versioning aims to remove breaking changes from open source software as much as possible, but at times they are unavoidable.
+Breaking changes forced by an upstream dependency (e.g. a service the package depends on being sunset) are out of scope of this specification,
+as the handling is highly dependent on specific circumstances.
+
+The only guidance we can offer is that forced breaking changes need to be taken seriously (the more seriously the more popular the package is) and handled like any other forced breach of contract: they should be communicated long enough ahead of time for consumers to adapt and alternatives or guidance should be offered.
+
+Package maintainers should also consider depending on other libraries and services very carefuly, if there is no alternative available to them to deliver the same functionality, should the dependency stop working.
 
 ## Immutable Versioning Specification (ImVer)
 
